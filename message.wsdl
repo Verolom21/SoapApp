@@ -1,0 +1,36 @@
+<?xml version ='1.0' encoding ='UTF-8' ?>
+
+<definitions name='Message'
+             targetNamespace='http://soap.app/'
+             xmlns:tns='http://soap.app/'
+             xmlns:soap='http://schemas.xmlsoap.org/wsdl/soap/'
+             xmlns:xsd='http://www.w3.org/2001/XMLSchema'
+             xmlns:soapenc='http://schemas.xmlsoap.org/soap/encoding/'
+             xmlns:wsdl='http://schemas.xmlsoap.org/wsdl/'
+             xmlns='http://schemas.xmlsoap.org/wsdl/'>
+
+    <message name='getMessageRequest'>
+        <part name='id' type='xsd:integer'/>
+    </message>
+    <message name='getMessageResponse'>
+        <part name='Result' type='xsd:string'/>
+    </message>
+
+    <portType name='MessagePortType'>
+        <operation name='getMessage'>
+            <input message='tns:getMessageRequest'/>
+            <output message='tns:getMessageResponse'/>
+        </operation>
+    </portType>
+
+    <binding name='MessageBinding' type='tns:MessagePortType'>
+        <soap:binding style='rpc' transport='http://schemas.xmlsoap.org/soap/http'/>
+        <operation name='getMessage' />
+    </binding>
+
+    <service name='MessageService'>
+        <port name='MessagePort' binding='MessageBinding'>
+            <soap:address location='http://soap.app/server.php'/>
+        </port>
+    </service>
+</definitions>
